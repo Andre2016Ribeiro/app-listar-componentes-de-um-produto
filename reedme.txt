@@ -1,0 +1,1 @@
+jun 2025 app did´nt open browser, nedd to update Selenium.WebDriver.ChromeDriver 137.0.7151.7000
