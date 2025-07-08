@@ -77,7 +77,7 @@ namespace app_acessorios_a_registrar
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             var s = textBox1.Text;
-            string sqlCommand = "select top 20 Artigo From Artigo where Artigo like '" + s + "%'";
+            string sqlCommand = "select top 20 Artigo, Descricao From Artigo where Artigo like '" + s + "%'";
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
             SqlConnection ds = new SqlConnection(connectionString);
 
@@ -230,8 +230,42 @@ namespace app_acessorios_a_registrar
             try
             {
                 a = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+                if(String.Compare(a, "2") < 0)
+                {
+                    try
+                    {
+                        var driver = new ChromeDriver();
+                        driver.Navigate().GoToUrl("http://10.0.0.243/gpr/pedidos_mp_Fabrico/pedidos_mp_fabrico.php");
+                        try
+                        {
+                            var input = driver.FindElement(By.Name("pesquisa"));
+                            //input.Equals("NewVaue");
+                            input.SendKeys(a);
+                            var input1 = driver.FindElement(By.Id("fillup"));
+                            //input.Equals("NewVaue");
+                            input1.SendKeys("1");
+                            var input2 = driver.FindElement(By.Id("cbUni"));
+                            //input.Equals("NewVaue");
+                            input2.SendKeys("Caixa");
+                            var input3 = driver.FindElement(By.Id("cbLoc"));
+                            //input.Equals("NewVaue");
+                            input3.SendKeys("Linha1");
+                            var input4 = driver.FindElement(By.Id("cbPri"));
+                            //input.Equals("NewVaue");
+                            input4.SendKeys("Urgencia Media"); ;
 
-                if (String.Compare(a, "A") < 0)
+
+                            //System.Threading.Thread.Sleep(50000);
+                            //driver.Quit();
+                        }
+                        finally { }
+
+
+                    }
+                    catch { MessageBox.Show("não foi possivel abrir Web Browser"); }
+                    finally { }
+                }
+                else if (String.Compare(a, "A") < 0)
                 {
                     try
                     {
