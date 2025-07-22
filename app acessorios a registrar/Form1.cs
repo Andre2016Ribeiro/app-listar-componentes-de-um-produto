@@ -459,7 +459,7 @@ namespace app_acessorios_a_registrar
 
             var s = textBox1.Text;
            
-            string sqlCommand = "SELECT GPR_ArtigoComponentes.Componente, (select Artigo.Descricao From Artigo where GPR_ArtigoComponentes.Componente= Artigo.Artigo) As Descrição, GPR_ArtigoComponentes.consumo  As Quantidade,  (SELECT Sum(ArtigoArmazem.StkActual) FROM ArtigoArmazem  WHERE  ArtigoArmazem.Artigo = GPR_ArtigoComponentes.Componente AND  ArtigoArmazem.Armazem in ('ZP0','ZPD','ZPP','ZKD','ZPM')) as Stock_total FROM Artigo, GPR_ArtigoComponentes where GPR_ArtigoComponentes.Artigo=Artigo.Artigo AND (Artigo.Artigo like '" + s + "' or Artigo.CodBarras like '" + s + "')";
+            string sqlCommand = "SELECT comp.Componente, a.Descricao AS Descrição, comp.consumo AS Quantidade, SUM(CASE WHEN ar.Armazem IN ('ZP0','ZPD','ZPP','ZKD','ZPM') THEN ar.StkActual ELSE 0 END) AS Stock_total, SUM(CASE WHEN ar.Armazem = 'ZP0' THEN ar.StkActual ELSE 0 END) AS ZP0, SUM(CASE WHEN ar.Armazem = 'ZPD' THEN ar.StkActual ELSE 0 END) AS ZPD, SUM(CASE WHEN ar.Armazem = 'ZPP' THEN ar.StkActual ELSE 0 END) AS ZPP, SUM(CASE WHEN ar.Armazem = 'ZKD' THEN ar.StkActual ELSE 0 END) AS ZKD, SUM(CASE WHEN ar.Armazem = 'ZPM' THEN ar.StkActual ELSE 0 END) AS ZPM FROM GPR_ArtigoComponentes comp INNER JOIN Artigo a ON comp.Componente = a.Artigo LEFT JOIN ArtigoArmazem ar ON ar.Artigo = comp.Componente INNER JOIN Artigo main_artigo ON comp.Artigo = main_artigo.Artigo WHERE (main_artigo.Artigo like '" + s + "' or main_artigo.CodBarras like '" + s + "') GROUP BY comp.Componente, a.Descricao, comp.consumo, a.CodBarras";
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
 
             SqlConnection ds = new SqlConnection(connectionString);
@@ -494,6 +494,7 @@ namespace app_acessorios_a_registrar
                     dataGridView1.Rows[i].Cells[3].Value = 0;
                     dataGridView1.Rows[i].Cells[3].Style.BackColor = Color.Yellow;
                 }
+                else { dataGridView1.Rows[i].Cells[3].Style.BackColor = Color.White; }
 
             }
 
