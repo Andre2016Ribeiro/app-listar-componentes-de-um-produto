@@ -26,8 +26,10 @@ namespace app_acessorios_a_registrar
         {
             InitializeComponent();
             button1.Click += new EventHandler(button1_Click);
-
+            
         }
+        private int h=0;
+        private int k;
 
         private string l;
         private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -35,9 +37,29 @@ namespace app_acessorios_a_registrar
             if (dataGridView1.CurrentCell.ColumnIndex.Equals(0))
                 if (dataGridView1.CurrentCell != null && dataGridView1.CurrentCell.Value != null)
                 {
-                    var t = dataGridView1.CurrentCell.Value.ToString();
+                    if (k == 1) {
+                        h = 1;
 
-                    string sqlCommand = "SELECT GPR_ArtigoComponentes.Componente, (select Artigo.Descricao From Artigo where GPR_ArtigoComponentes.Componente= Artigo.Artigo) As Descrição, GPR_ArtigoComponentes.consumo  As Quantidade, (select Artigo.CodBarras From Artigo where GPR_ArtigoComponentes.Componente= Artigo.Artigo) As CodBarras FROM Artigo, GPR_ArtigoComponentes where GPR_ArtigoComponentes.Artigo=Artigo.Artigo AND (Artigo.Artigo like '" + t + "' or Artigo.CodBarras like '" + t + "')";
+                        textBox1.Text = dataGridView1.CurrentCell.Value.ToString();
+                        button1_Click(null, null);
+                    }
+                    else if(k==2){
+                        h = 2;
+
+                        textBox1.Text = dataGridView1.CurrentCell.Value.ToString();
+                        button2_Click(null, null);
+                    }
+                    else { h = 3;
+
+                    textBox1.Text= dataGridView1.CurrentCell.Value.ToString();
+                    button6_Click(null,null);}
+                        
+
+
+
+                    /*var z = dataGridView1.CurrentCell.Value.ToString();
+
+                    string sqlCommand = "SELECT GPR_ArtigoComponentes.Componente, (select Artigo.Descricao From Artigo where GPR_ArtigoComponentes.Componente= Artigo.Artigo) As Descrição, GPR_ArtigoComponentes.consumo  As Quantidade, (select Artigo.CodBarras From Artigo where GPR_ArtigoComponentes.Componente= Artigo.Artigo) As CodBarras FROM Artigo, GPR_ArtigoComponentes where GPR_ArtigoComponentes.Artigo=Artigo.Artigo AND (Artigo.Artigo like '" + z + "' or Artigo.CodBarras like '" + z + "')";
                     string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
 
 
@@ -55,7 +77,7 @@ namespace app_acessorios_a_registrar
 
                     dataGridView1.DataSource = dt;
 
-                    textBox1.Text = t;
+                    textBox1.Text = z;*/
                 }
 
 
@@ -81,7 +103,7 @@ namespace app_acessorios_a_registrar
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
             SqlConnection ds = new SqlConnection(connectionString);
 
-
+           
 
             ds.Open();
 
@@ -97,9 +119,11 @@ namespace app_acessorios_a_registrar
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (h==0){l = textBox1.Text; }
+            k = 1;
 
             var s = textBox1.Text;
-            l = textBox1.Text;
+            
             string sqlCommand = "SELECT GPR_ArtigoComponentes.Componente, (select Artigo.Descricao From Artigo where GPR_ArtigoComponentes.Componente= Artigo.Artigo) As Descrição, GPR_ArtigoComponentes.consumo  As Quantidade, (select Artigo.CodBarras From Artigo where GPR_ArtigoComponentes.Componente= Artigo.Artigo) As CodBarras FROM Artigo, GPR_ArtigoComponentes where GPR_ArtigoComponentes.Artigo=Artigo.Artigo AND (Artigo.Artigo like '" + s + "' or Artigo.CodBarras like '" + s + "') AND (GPR_ArtigoComponentes.Componente like '3%' or GPR_ArtigoComponentes.Componente like '4%')";
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
 
@@ -111,17 +135,21 @@ namespace app_acessorios_a_registrar
 
 
             SqlDataAdapter da = new SqlDataAdapter(sqlCommand, ds);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            ds.Close();
+            DataTable d3 = new DataTable();
 
-            dataGridView1.DataSource = dt;
+           
+            da.Fill(d3);
+            ds.Close();
+            
+            
+            
+            dataGridView1.DataSource = d3;
 
             dataGridView1.Columns[1].Width = 350;
             dataGridView1.Columns[3].Width = 400;
             dataGridView1.RowTemplate.Height = 80;
             dataGridView1.Columns[3].DefaultCellStyle.Font = new Font("Code 128", 60);
-
+            dataGridView1.DefaultCellStyle.BackColor = Color.LightCoral;
 
 
 
@@ -153,14 +181,18 @@ namespace app_acessorios_a_registrar
                     var t = dataGridView2.CurrentCell.Value.ToString();
 
                     textBox1.Text = t;
+                    h = 0;
                 }
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (h == 0) { l = textBox1.Text; }
+            k = 2;
+
             var s = textBox1.Text;
-            l = textBox1.Text;
+            
             string sqlCommand = "SELECT GPR_ArtigoComponentes.Componente, (select Artigo.Descricao From Artigo where GPR_ArtigoComponentes.Componente= Artigo.Artigo) As Descrição, GPR_ArtigoComponentes.consumo  As Quantidade, (select Artigo.CodBarras From Artigo where GPR_ArtigoComponentes.Componente= Artigo.Artigo) As CodBarras FROM Artigo, GPR_ArtigoComponentes where GPR_ArtigoComponentes.Artigo=Artigo.Artigo AND (Artigo.Artigo like '" + s + "' or Artigo.CodBarras like '" + s + "')";
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
 
@@ -172,19 +204,31 @@ namespace app_acessorios_a_registrar
 
 
             SqlDataAdapter da = new SqlDataAdapter(sqlCommand, ds);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
+            DataTable d3 = new DataTable();
+            
+            da.Fill(d3);
             ds.Close();
-
-            dataGridView1.DataSource = dt;
+            
+            
+            
+            dataGridView1.DataSource = d3;
 
             dataGridView1.Columns[1].Width = 350;
             dataGridView1.Columns[3].Width = 400;
             dataGridView1.RowTemplate.Height = 80;
             dataGridView1.Columns[3].DefaultCellStyle.Font = new Font("Code 128", 60);
-
-
-
+            dataGridView1.DefaultCellStyle.BackColor = Color.White;
+            
+            for (int i = 0; i < dataGridView1.RowCount-1; i++)
+            {
+                
+                
+                    if (dataGridView1.Rows[i].Cells[3].Value == null)
+                    {
+                        dataGridView1.Rows[i].Cells[3].Value = 0;
+                    }
+               
+            }
 
 
 
@@ -194,7 +238,32 @@ namespace app_acessorios_a_registrar
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (l != null)
+
+            if (h == 1)
+            {
+                h = 0;
+
+                textBox1.Text = l;
+                button1_Click(null, null);
+            }
+            else if (h == 2)
+            {
+                h = 0;
+
+                textBox1.Text = l;
+                button2_Click(null, null);
+            }
+            else
+            {
+                h = 0;
+
+                textBox1.Text = l;
+                button6_Click(null, null);
+            }
+
+
+
+            /*if (l != null)
             {
                 textBox1.Text = l;
                 string sqlCommand = "SELECT GPR_ArtigoComponentes.Componente, (select Artigo.Descricao From Artigo where GPR_ArtigoComponentes.Componente= Artigo.Artigo) As Descrição, GPR_ArtigoComponentes.consumo  As Quantidade, (select Artigo.CodBarras From Artigo where GPR_ArtigoComponentes.Componente= Artigo.Artigo) As CodBarras FROM Artigo, GPR_ArtigoComponentes where GPR_ArtigoComponentes.Artigo=Artigo.Artigo AND (Artigo.Artigo like '" + l + "' or Artigo.CodBarras like '" + l + "')";
@@ -218,10 +287,10 @@ namespace app_acessorios_a_registrar
                 dataGridView1.Columns[3].Width = 400;
                 dataGridView1.RowTemplate.Height = 80;
                 dataGridView1.Columns[3].DefaultCellStyle.Font = new Font("Code 128", 60);
+                
 
 
-
-            }
+            }*/
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -383,7 +452,52 @@ namespace app_acessorios_a_registrar
             catch { MessageBox.Show("Tem de selecionar uma linha"); }
         }
 
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (h == 0) { l = textBox1.Text; }
+            k = 3;
+
+            var s = textBox1.Text;
+           
+            string sqlCommand = "SELECT GPR_ArtigoComponentes.Componente, (select Artigo.Descricao From Artigo where GPR_ArtigoComponentes.Componente= Artigo.Artigo) As Descrição, GPR_ArtigoComponentes.consumo  As Quantidade,  (SELECT Sum(ArtigoArmazem.StkActual) FROM ArtigoArmazem  WHERE  ArtigoArmazem.Artigo = GPR_ArtigoComponentes.Componente AND  ArtigoArmazem.Armazem in ('ZP0','ZPD','ZPP','ZKD','ZPM')) as Stock_total FROM Artigo, GPR_ArtigoComponentes where GPR_ArtigoComponentes.Artigo=Artigo.Artigo AND (Artigo.Artigo like '" + s + "' or Artigo.CodBarras like '" + s + "')";
+            string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
+
+            SqlConnection ds = new SqlConnection(connectionString);
 
 
+
+            ds.Open();
+
+
+            SqlDataAdapter da = new SqlDataAdapter(sqlCommand, ds);
+            DataTable d3 = new DataTable();
+            da.Fill(d3);
+            ds.Close();
+            
+            
+            
+            dataGridView1.DataSource = d3;
+
+            dataGridView1.Columns[1].Width = 350;
+            
+            dataGridView1.RowTemplate.Height = 80;
+            dataGridView1.DefaultCellStyle.BackColor = Color.LightGray;
+
+
+
+            for (int i = 0; i < dataGridView1.RowCount - 1; i++)
+            {
+
+
+                if (dataGridView1.Rows[i].Cells[3].Value.ToString() == "0" || dataGridView1.Rows[i].Cells[3].Value.ToString() == "")
+                {
+                    dataGridView1.Rows[i].Cells[3].Value = 0;
+                    dataGridView1.Rows[i].Cells[3].Style.BackColor = Color.Yellow;
+                }
+
+            }
+
+
+        }
     }
 }
