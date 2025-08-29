@@ -305,6 +305,9 @@ namespace app_acessorios_a_registrar
                     {
                         var driver = new ChromeDriver();
                         driver.Navigate().GoToUrl("http://10.0.0.243/gpr/pedidos_mp_Fabrico/pedidos_mp_fabrico.php");
+                        
+                       
+                        
                         try
                         {
                             var input = driver.FindElement(By.Name("pesquisa"));
@@ -331,7 +334,7 @@ namespace app_acessorios_a_registrar
 
 
                     }
-                    catch { MessageBox.Show("não foi possivel abrir Web Browser"); }
+                    catch (Exception ex) { MessageBox.Show("não foi possivel abrir Web Browser", ex.ToString()); Console.WriteLine(ex.ToString()); }
                     finally { }
                 }
                 else if (String.Compare(a, "A") < 0)
@@ -366,7 +369,7 @@ namespace app_acessorios_a_registrar
 
 
                     }
-                    catch { MessageBox.Show("não foi possivel abrir Web Browser"); }
+                    catch (Exception ex) { MessageBox.Show("não foi possivel abrir Web Browser", ex.ToString()); Console.WriteLine(ex.ToString()); }
                     finally { }
                 }
                 else
@@ -401,7 +404,7 @@ namespace app_acessorios_a_registrar
 
 
                     }
-                    catch { MessageBox.Show("não foi possivel abrir Web Browser"); }
+                    catch (Exception ex) { MessageBox.Show("não foi possivel abrir Web Browser", ex.ToString()); Console.WriteLine(ex.ToString()); }
                     finally { }
                 }
             }
@@ -443,8 +446,8 @@ namespace app_acessorios_a_registrar
 
 
                     }
-                    catch { MessageBox.Show("não foi possivel abrir Web Browser"); }
-                    finally { }
+                catch (Exception ex) { MessageBox.Show("não foi possivel abrir Web Browser", ex.ToString());Console.WriteLine(ex.ToString()); }
+                finally { }
                 
 
 
@@ -459,7 +462,7 @@ namespace app_acessorios_a_registrar
 
             var s = textBox1.Text;
            
-            string sqlCommand = "SELECT comp.Componente, a.Descricao AS Descrição, comp.consumo AS Quantidade, SUM(CASE WHEN ar.Armazem IN ('ZP0','ZPD','ZPP','ZKD','ZPM') THEN ar.StkActual ELSE 0 END) AS Stock_total, SUM(CASE WHEN ar.Armazem = 'ZP0' THEN ar.StkActual ELSE 0 END) AS ZP0, SUM(CASE WHEN ar.Armazem = 'ZPD' THEN ar.StkActual ELSE 0 END) AS ZPD, SUM(CASE WHEN ar.Armazem = 'ZPP' THEN ar.StkActual ELSE 0 END) AS ZPP, SUM(CASE WHEN ar.Armazem = 'ZKD' THEN ar.StkActual ELSE 0 END) AS ZKD, SUM(CASE WHEN ar.Armazem = 'ZPM' THEN ar.StkActual ELSE 0 END) AS ZPM FROM GPR_ArtigoComponentes comp INNER JOIN Artigo a ON comp.Componente = a.Artigo LEFT JOIN ArtigoArmazem ar ON ar.Artigo = comp.Componente INNER JOIN Artigo main_artigo ON comp.Artigo = main_artigo.Artigo WHERE (main_artigo.Artigo like '" + s + "' or main_artigo.CodBarras like '" + s + "') GROUP BY comp.Componente, a.Descricao, comp.consumo, a.CodBarras";
+            string sqlCommand = "SELECT comp.Componente, a.Descricao AS Descrição, comp.consumo AS Quantidade, SUM(CASE WHEN ar.Armazem IN ('ZP0','ZPD','ZPP','ZKD','ZPM') THEN ar.StkActual ELSE 0 END) AS Stock_total, SUM(CASE WHEN ar.Armazem = 'ZP0' THEN ar.StkActual ELSE 0 END) AS ZP0_MP, SUM(CASE WHEN ar.Armazem = 'ZPD' THEN ar.StkActual ELSE 0 END) AS ZPD_MP_Avepk, SUM(CASE WHEN ar.Armazem = 'ZPP' THEN ar.StkActual ELSE 0 END) AS ZPP_Pintura, SUM(CASE WHEN ar.Armazem = 'ZKD' THEN ar.StkActual ELSE 0 END) AS ZKD_Pintura_Avepk, SUM(CASE WHEN ar.Armazem = 'ZPM' THEN ar.StkActual ELSE 0 END) AS ZPM_Fabrico FROM GPR_ArtigoComponentes comp INNER JOIN Artigo a ON comp.Componente = a.Artigo LEFT JOIN ArtigoArmazem ar ON ar.Artigo = comp.Componente INNER JOIN Artigo main_artigo ON comp.Artigo = main_artigo.Artigo WHERE (main_artigo.Artigo like '" + s + "' or main_artigo.CodBarras like '" + s + "') GROUP BY comp.Componente, a.Descricao, comp.consumo, a.CodBarras";
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
 
             SqlConnection ds = new SqlConnection(connectionString);
