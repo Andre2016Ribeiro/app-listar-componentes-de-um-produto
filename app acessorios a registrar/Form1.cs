@@ -547,5 +547,41 @@ namespace app_acessorios_a_registrar
 
 
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            string c = "";
+            try
+            {
+                c = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+                // Auto-download & setup correct ChromeDriver version
+                new DriverManager().SetUpDriver(new ChromeConfig());
+
+                // Optional: custom options (headless, profile, etc.)
+                var options = new ChromeOptions();
+                // options.AddArgument("--headless=new");          // uncomment for no UI
+                // options.AddArgument("--disable-gpu");           // sometimes needed
+                // options.AddArgument("--user-data-dir=profile"); // use specific profile
+
+                IWebDriver driver = new ChromeDriver(options);
+
+                try
+                {
+                    driver.Manage().Window.Maximize();
+                    driver.Navigate().GoToUrl("http://10.0.0.243/GPR/ProcDesen.php/?artigo=" + c);
+                    
+
+
+                }
+                catch (Exception ex) { MessageBox.Show("não foi possivel abrir Web Browser", ex.ToString()); Console.WriteLine(ex.ToString()); }
+                finally { }
+
+
+
+            }
+            catch { MessageBox.Show("Tem de selecionar uma linha"); }
+
+
+        }
     }
 }
