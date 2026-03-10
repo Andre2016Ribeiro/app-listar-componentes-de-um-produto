@@ -449,6 +449,12 @@ namespace app_acessorios_a_registrar
 
         private void button5_Click(object sender, EventArgs e)
         {
+
+            if (k == 1) { }
+            else
+            { button1.PerformClick(); k = 1; }
+            
+                
             string c = "";
             try
             {
@@ -467,7 +473,7 @@ namespace app_acessorios_a_registrar
                 try
                     {
                     driver.Manage().Window.Maximize();
-                    driver.Navigate().GoToUrl("http://10.0.0.243/soft/linha1/regl1_.php");
+                    driver.Navigate().GoToUrl("http://10.0.0.243/SOFT/linha1/regL1_/regL1_.php");
                         try
                         {
                            
