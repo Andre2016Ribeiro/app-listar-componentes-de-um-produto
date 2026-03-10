@@ -16,7 +16,8 @@ using System.Xml.Linq;
 using mshtml;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-
+using WebDriverManager;
+using WebDriverManager.DriverConfigs.Impl;
 
 namespace app_acessorios_a_registrar
 {
@@ -299,11 +300,21 @@ namespace app_acessorios_a_registrar
             try
             {
                 a = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
-                if(String.Compare(a, "2") < 0)
+                if(String.Compare(a, "2") < 0 || a.StartsWith("31AF"))
                 {
+                    // Auto-download & setup correct ChromeDriver version
+                    new DriverManager().SetUpDriver(new ChromeConfig());
+
+                    // Optional: custom options (headless, profile, etc.)
+                    var options = new ChromeOptions();
+                    // options.AddArgument("--headless=new");          // uncomment for no UI
+                    // options.AddArgument("--disable-gpu");           // sometimes needed
+                    // options.AddArgument("--user-data-dir=profile"); // use specific profile
+
+                    IWebDriver driver = new ChromeDriver(options);
                     try
                     {
-                        var driver = new ChromeDriver();
+                        driver.Manage().Window.Maximize();
                         driver.Navigate().GoToUrl("http://10.0.0.243/gpr/pedidos_mp_Fabrico/pedidos_mp_fabrico.php");
                         
                        
@@ -331,17 +342,26 @@ namespace app_acessorios_a_registrar
                             //driver.Quit();
                         }
                         finally { }
-
+//"não foi possivel abrir Web Browser"//
 
                     }
                     catch (Exception ex) { MessageBox.Show("não foi possivel abrir Web Browser", ex.ToString()); Console.WriteLine(ex.ToString()); }
                     finally { }
                 }
-                else if (String.Compare(a, "A") < 0)
-                {
+                else if (String.Compare(a, "A") < 0 )
+                {// Auto-download & setup correct ChromeDriver version
+                    new DriverManager().SetUpDriver(new ChromeConfig());
+
+                    // Optional: custom options (headless, profile, etc.)
+                    var options = new ChromeOptions();
+                    // options.AddArgument("--headless=new");          // uncomment for no UI
+                    // options.AddArgument("--disable-gpu");           // sometimes needed
+                    // options.AddArgument("--user-data-dir=profile"); // use specific profile
+
+                    IWebDriver driver = new ChromeDriver(options);
                     try
                     {
-                        var driver = new ChromeDriver();
+                        driver.Manage().Window.Maximize();
                         driver.Navigate().GoToUrl("http://10.0.0.243/gpr/pedidos_MP_pintura/pedidos_MP_pintura.php");
                         try
                         {
@@ -373,10 +393,19 @@ namespace app_acessorios_a_registrar
                     finally { }
                 }
                 else
-                {
+                {// Auto-download & setup correct ChromeDriver version
+                    new DriverManager().SetUpDriver(new ChromeConfig());
+
+                    // Optional: custom options (headless, profile, etc.)
+                    var options = new ChromeOptions();
+                    // options.AddArgument("--headless=new");          // uncomment for no UI
+                    // options.AddArgument("--disable-gpu");           // sometimes needed
+                    // options.AddArgument("--user-data-dir=profile"); // use specific profile
+
+                    IWebDriver driver = new ChromeDriver(options);
                     try
                     {
-                        var driver = new ChromeDriver();
+                        driver.Manage().Window.Maximize();
                         driver.Navigate().GoToUrl("http://10.0.0.243/gpr/pedidos_mp/pedidos_MP.php");
                         try
                         {
@@ -424,12 +453,21 @@ namespace app_acessorios_a_registrar
             try
             {
                 c = dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
+                // Auto-download & setup correct ChromeDriver version
+                new DriverManager().SetUpDriver(new ChromeConfig());
 
-                
-                    try
+                // Optional: custom options (headless, profile, etc.)
+                var options = new ChromeOptions();
+                // options.AddArgument("--headless=new");          // uncomment for no UI
+                // options.AddArgument("--disable-gpu");           // sometimes needed
+                // options.AddArgument("--user-data-dir=profile"); // use specific profile
+
+                IWebDriver driver = new ChromeDriver(options);
+
+                try
                     {
-                        var driver = new ChromeDriver();
-                        driver.Navigate().GoToUrl("http://10.0.0.243/soft/linha1/regl1_.php");
+                    driver.Manage().Window.Maximize();
+                    driver.Navigate().GoToUrl("http://10.0.0.243/soft/linha1/regl1_.php");
                         try
                         {
                            
