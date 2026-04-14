@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Selenium.WebDriver.4.43.0\build\Selenium.WebDriver.props" Condition="Exists('..\packages\Selenium.WebDriver.4.43.0\build\Selenium.WebDriver.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,10 +54,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>8104F940494814CBEECF712E0E0F66B695CFB0E8</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>ED8B63E86254C51A8729A6759965E036C9A7283F</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>app acessorios a registrar_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>app acessorios a registrar_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -89,6 +90,9 @@
     <Reference Include="ICSharpCode.SharpZipLib, Version=1.4.2.13, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpZipLib.1.4.2\lib\netstandard2.0\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <HintPath>..\packages\Unofficial.Microsoft.mshtml.7.0.3300\lib\net40\Microsoft.mshtml.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -120,8 +124,9 @@
     <Reference Include="System.Data.SqlClient, Version=4.6.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SqlClient.4.9.0\lib\net462\System.Data.SqlClient.dll</HintPath>
     </Reference>
-    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -139,8 +144,20 @@
     <Reference Include="System.Text.Encoding.CodePages, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Text.Encoding.CodePages.6.0.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
     </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=8.0.0.5, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.8.0.5\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Channels, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Channels.8.0.0\lib\net462\System.Threading.Channels.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -152,16 +169,13 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="WebDriver, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selenium.WebDriver.4.1.0\lib\net48\WebDriver.dll</HintPath>
+      <HintPath>..\packages\Selenium.WebDriver.4.43.0\lib\net462\WebDriver.dll</HintPath>
     </Reference>
     <Reference Include="WebDriver.Support, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Selenium.Support.4.1.0\lib\net48\WebDriver.Support.dll</HintPath>
     </Reference>
     <Reference Include="WebDriverController, Version=0.4.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RafaelEstevam.WebDriverController.0.4.2\lib\net45\WebDriverController.dll</HintPath>
-    </Reference>
-    <Reference Include="WebDriverManager, Version=2.17.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WebDriverManager.2.17.7\lib\net472\WebDriverManager.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -185,7 +199,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="app acessorios a registrar_TemporaryKey.pfx" />
+    <None Include="app acessorios a registrar_1_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -222,6 +236,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Selenium.Chrome.WebDriver.85.0.0\build\Selenium.Chrome.WebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.Chrome.WebDriver.85.0.0\build\Selenium.Chrome.WebDriver.targets'))" />
     <Error Condition="!Exists('..\packages\Selenium.WebDriver.ChromeDriver.145.0.7632.11700\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.ChromeDriver.145.0.7632.11700\build\Selenium.WebDriver.ChromeDriver.targets'))" />
+    <Error Condition="!Exists('..\packages\Selenium.WebDriver.4.43.0\build\Selenium.WebDriver.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.4.43.0\build\Selenium.WebDriver.props'))" />
   </Target>
   <Import Project="..\packages\Selenium.Chrome.WebDriver.85.0.0\build\Selenium.Chrome.WebDriver.targets" Condition="Exists('..\packages\Selenium.Chrome.WebDriver.85.0.0\build\Selenium.Chrome.WebDriver.targets')" />
   <Import Project="..\packages\Selenium.WebDriver.ChromeDriver.145.0.7632.11700\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.ChromeDriver.145.0.7632.11700\build\Selenium.WebDriver.ChromeDriver.targets')" />

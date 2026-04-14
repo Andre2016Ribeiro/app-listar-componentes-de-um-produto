@@ -16,8 +16,7 @@ using System.Xml.Linq;
 using mshtml;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using WebDriverManager;
-using WebDriverManager.DriverConfigs.Impl;
+
 
 namespace app_acessorios_a_registrar
 {
@@ -303,7 +302,7 @@ namespace app_acessorios_a_registrar
                 if(String.Compare(a, "2") < 0 || a.StartsWith("31AF"))
                 {
                     // Auto-download & setup correct ChromeDriver version
-                    new DriverManager().SetUpDriver(new ChromeConfig());
+                    //new DriverManager().SetUpDriver(new ChromeConfig());
 
                     // Optional: custom options (headless, profile, etc.)
                     var options = new ChromeOptions();
@@ -350,7 +349,7 @@ namespace app_acessorios_a_registrar
                 }
                 else if (String.Compare(a, "A") < 0 )
                 {// Auto-download & setup correct ChromeDriver version
-                    new DriverManager().SetUpDriver(new ChromeConfig());
+                    //new DriverManager().SetUpDriver(new ChromeConfig());
 
                     // Optional: custom options (headless, profile, etc.)
                     var options = new ChromeOptions();
@@ -394,7 +393,7 @@ namespace app_acessorios_a_registrar
                 }
                 else
                 {// Auto-download & setup correct ChromeDriver version
-                    new DriverManager().SetUpDriver(new ChromeConfig());
+                    //new DriverManager().SetUpDriver(new ChromeConfig());
 
                     // Optional: custom options (headless, profile, etc.)
                     var options = new ChromeOptions();
@@ -460,7 +459,7 @@ namespace app_acessorios_a_registrar
             {
                 c = dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
                 // Auto-download & setup correct ChromeDriver version
-                new DriverManager().SetUpDriver(new ChromeConfig());
+                //new DriverManager().SetUpDriver(new ChromeConfig());
 
                 // Optional: custom options (headless, profile, etc.)
                 var options = new ChromeOptions();
@@ -555,7 +554,7 @@ namespace app_acessorios_a_registrar
             {
                 c = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
                 // Auto-download & setup correct ChromeDriver version
-                new DriverManager().SetUpDriver(new ChromeConfig());
+               // new DriverManager().SetUpDriver(new ChromeConfig());
 
                 // Optional: custom options (headless, profile, etc.)
                 var options = new ChromeOptions();
