@@ -302,7 +302,7 @@ namespace app_acessorios_a_registrar
                 if(String.Compare(a, "2") < 0 || a.StartsWith("31AF"))
                 {
                     // Auto-download & setup correct ChromeDriver version
-                    //new DriverManager().SetUpDriver(new ChromeConfig());
+                 
 
                     // Optional: custom options (headless, profile, etc.)
                     var options = new ChromeOptions();
@@ -310,7 +310,8 @@ namespace app_acessorios_a_registrar
                     // options.AddArgument("--disable-gpu");           // sometimes needed
                     // options.AddArgument("--user-data-dir=profile"); // use specific profile
 
-                    IWebDriver driver = new ChromeDriver(options);
+                    var service = ChromeDriverService.CreateDefaultService();
+                    IWebDriver driver = new ChromeDriver(service, options);
                     try
                     {
                         driver.Manage().Window.Maximize();
@@ -340,8 +341,9 @@ namespace app_acessorios_a_registrar
                             //System.Threading.Thread.Sleep(50000);
                             //driver.Quit();
                         }
+                        catch (Exception ex) { MessageBox.Show( ex.ToString()); Console.WriteLine(ex.ToString()); }
                         finally { }
-//"não foi possivel abrir Web Browser"//
+                        //"não foi possivel abrir Web Browser"//
 
                     }
                     catch (Exception ex) { MessageBox.Show("não foi possivel abrir Web Browser", ex.ToString()); Console.WriteLine(ex.ToString()); }
@@ -349,15 +351,15 @@ namespace app_acessorios_a_registrar
                 }
                 else if (String.Compare(a, "A") < 0 )
                 {// Auto-download & setup correct ChromeDriver version
-                    //new DriverManager().SetUpDriver(new ChromeConfig());
+                   
 
                     // Optional: custom options (headless, profile, etc.)
                     var options = new ChromeOptions();
                     // options.AddArgument("--headless=new");          // uncomment for no UI
                     // options.AddArgument("--disable-gpu");           // sometimes needed
                     // options.AddArgument("--user-data-dir=profile"); // use specific profile
-
-                    IWebDriver driver = new ChromeDriver(options);
+                    var service = ChromeDriverService.CreateDefaultService();
+                    IWebDriver driver = new ChromeDriver(service, options);
                     try
                     {
                         driver.Manage().Window.Maximize();
@@ -384,6 +386,7 @@ namespace app_acessorios_a_registrar
                             //System.Threading.Thread.Sleep(50000);
                             //driver.Quit();
                         }
+                        catch (Exception ex) { MessageBox.Show(ex.ToString()); Console.WriteLine(ex.ToString()); }
                         finally { }
 
 
@@ -393,7 +396,7 @@ namespace app_acessorios_a_registrar
                 }
                 else
                 {// Auto-download & setup correct ChromeDriver version
-                    //new DriverManager().SetUpDriver(new ChromeConfig());
+                    
 
                     // Optional: custom options (headless, profile, etc.)
                     var options = new ChromeOptions();
@@ -401,7 +404,8 @@ namespace app_acessorios_a_registrar
                     // options.AddArgument("--disable-gpu");           // sometimes needed
                     // options.AddArgument("--user-data-dir=profile"); // use specific profile
 
-                    IWebDriver driver = new ChromeDriver(options);
+                    var service = ChromeDriverService.CreateDefaultService();
+                    IWebDriver driver = new ChromeDriver(service, options);
                     try
                     {
                         driver.Manage().Window.Maximize();
@@ -428,6 +432,7 @@ namespace app_acessorios_a_registrar
                             //System.Threading.Thread.Sleep(50000);
                             //driver.Quit();
                         }
+                        catch (Exception ex) { MessageBox.Show(ex.ToString()); Console.WriteLine(ex.ToString()); }
                         finally { }
 
 
@@ -459,15 +464,15 @@ namespace app_acessorios_a_registrar
             {
                 c = dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
                 // Auto-download & setup correct ChromeDriver version
-                //new DriverManager().SetUpDriver(new ChromeConfig());
+                
 
                 // Optional: custom options (headless, profile, etc.)
                 var options = new ChromeOptions();
                 // options.AddArgument("--headless=new");          // uncomment for no UI
                 // options.AddArgument("--disable-gpu");           // sometimes needed
                 // options.AddArgument("--user-data-dir=profile"); // use specific profile
-
-                IWebDriver driver = new ChromeDriver(options);
+                var service = ChromeDriverService.CreateDefaultService();
+                IWebDriver driver = new ChromeDriver(service, options);
 
                 try
                     {
@@ -485,10 +490,11 @@ namespace app_acessorios_a_registrar
                             //System.Threading.Thread.Sleep(50000);
                             //driver.Quit();
                         }
-                        finally { }
+                    catch (Exception ex) { MessageBox.Show(ex.ToString()); Console.WriteLine(ex.ToString()); }
+                    finally { }
 
 
-                    }
+                }
                 catch (Exception ex) { MessageBox.Show("não foi possivel abrir Web Browser", ex.ToString());Console.WriteLine(ex.ToString()); }
                 finally { }
                 
@@ -553,16 +559,11 @@ namespace app_acessorios_a_registrar
             try
             {
                 c = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
-                // Auto-download & setup correct ChromeDriver version
-               // new DriverManager().SetUpDriver(new ChromeConfig());
-
-                // Optional: custom options (headless, profile, etc.)
+               
                 var options = new ChromeOptions();
-                // options.AddArgument("--headless=new");          // uncomment for no UI
-                // options.AddArgument("--disable-gpu");           // sometimes needed
-                // options.AddArgument("--user-data-dir=profile"); // use specific profile
 
-                IWebDriver driver = new ChromeDriver(options);
+                var service = ChromeDriverService.CreateDefaultService();
+                IWebDriver driver = new ChromeDriver(service, options);
 
                 try
                 {
@@ -572,13 +573,20 @@ namespace app_acessorios_a_registrar
 
 
                 }
-                catch (Exception ex) { MessageBox.Show("não foi possivel abrir Web Browser", ex.ToString()); Console.WriteLine(ex.ToString()); }
-                finally { }
+                catch (Exception ex)
+                {
+                    // ISTO VAI DIZER EXATAMENTE O QUE FALTA
+                    MessageBox.Show("ERRO DETALHADO: " + ex.ToString());
+                }
 
 
 
             }
-            catch { MessageBox.Show("Tem de selecionar uma linha"); }
+            catch (Exception ex)
+            {
+                // ISTO VAI DIZER EXATAMENTE O QUE FALTA
+                MessageBox.Show("ERRO DETALHADO1: " + ex.ToString());
+            }
 
 
         }
