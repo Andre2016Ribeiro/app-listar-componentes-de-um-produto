@@ -1,0 +1,34 @@
+# Aciona o pipeline sempre que houver um commit na branch main
+trigger:
+- main
+
+# OBRIGATÓRIO: Indica que deve usar o SEU agente local e não os da Microsoft
+pool:
+  name: 'Default' # Se deu outro nome à pool do agente, mude aqui
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+# 1. Descarrega os pacotes NuGet (como o Selenium)
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+# 2. Compila o projeto em modo Release
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+# 3. Copia o ficheiro final para a pasta de rede interna da fábrica
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)\bin\Release'
+    Contents: '**'
+    # Mude para o caminho real da sua pasta de rede interna
+    TargetFolder: '\\10.0.0.241\suporte\1.1. Outros\a' 
+    CleanTargetFolder: true # Limpa a pasta antes de colar a nova versão
