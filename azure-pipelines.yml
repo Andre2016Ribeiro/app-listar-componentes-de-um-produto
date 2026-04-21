@@ -30,5 +30,5 @@ steps:
     # Procura na pasta inteira do projeto por qualquer pasta bin\Release
     SourceFolder: '$(Build.SourcesDirectory)'
     Contents: '**/bin/Release/**'
-    TargetFolder: '\\10.0.0.241\suporte\1.1. Outros\a' 
+    TargetFolder: '\\10.0.0\suporte\1.1. Outros\a' 
     CleanTargetFolder: true # Limpa a pasta antes de colar a nova versão
