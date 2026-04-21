@@ -4,7 +4,7 @@ trigger:
 
 # OBRIGATÓRIO: Indica que deve usar o SEU agente local e não os da Microsoft
 pool:
-  name: 'Default' # Se deu outro nome à pool do agente, mude aqui
+  name: 'Default'
 
 variables:
   solution: '**/*.sln'
