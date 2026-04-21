@@ -27,8 +27,8 @@ steps:
 # 3. Copia o ficheiro final para a pasta de rede interna da fábrica
 - task: CopyFiles@2
   inputs:
-    SourceFolder: '$(Build.SourcesDirectory)\bin\Release'
-    Contents: '**'
-    # Mude para o caminho real da sua pasta de rede interna
+    # Procura na pasta inteira do projeto por qualquer pasta bin\Release
+    SourceFolder: '$(Build.SourcesDirectory)'
+    Contents: '**/bin/Release/**'
     TargetFolder: '\\10.0.0.241\suporte\1.1. Outros\a' 
     CleanTargetFolder: true # Limpa a pasta antes de colar a nova versão
