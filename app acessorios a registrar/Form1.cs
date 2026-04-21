@@ -585,7 +585,7 @@ namespace app_acessorios_a_registrar
             catch (Exception ex)
             {
                 // ISTO VAI DIZER EXATAMENTE O QUE FALTA
-                MessageBox.Show("ERRO DETALHADO1: " + ex.ToString());
+                MessageBox.Show("ERRO DETALHADO2: " + ex.ToString());
             }
 
 
