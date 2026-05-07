@@ -584,6 +584,7 @@ namespace app_acessorios_a_registrar
             }
             catch (Exception ex)
             {
+                MessageBox.Show("Tem de selecionar uma linha");
                 // ISTO VAI DIZER EXATAMENTE O QUE FALTA
                 MessageBox.Show("ERRO DETALHADO2: " + ex.ToString());
             }

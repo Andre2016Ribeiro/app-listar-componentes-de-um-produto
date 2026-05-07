@@ -54,10 +54,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>ED8B63E86254C51A8729A6759965E036C9A7283F</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>34599FF719DDF59424B0A70D7D86AD5642FB060F</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>app acessorios a registrar_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>app acessorios a registrar_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -73,6 +73,12 @@
   </PropertyGroup>
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>app acessorios a registrar_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=1.1.2.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
@@ -200,6 +206,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="app acessorios a registrar_1_TemporaryKey.pfx" />
+    <None Include="app acessorios a registrar_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
